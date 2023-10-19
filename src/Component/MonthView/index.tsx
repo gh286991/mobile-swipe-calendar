@@ -1,3 +1,6 @@
+
+import style from './style.module.scss'
+
 type  Prop= {
   monthDate : any
 }
@@ -8,7 +11,7 @@ function MonthView({ monthDate } : Prop) {
   const days = Array.from({ length: daysInMonth }, (_, idx) => idx + 1);
 
   return (
-      <div key={monthDate}>
+      <div key={monthDate} className={style.container}>
           <div>{monthDate.toLocaleString('default', { month: 'long' })} {monthDate.getFullYear()}</div>
           <table>
               <thead>
