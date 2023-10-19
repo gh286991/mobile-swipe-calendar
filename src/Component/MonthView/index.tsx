@@ -1,28 +1,30 @@
+import { format, getDaysInMonth, startOfMonth, getDay } from 'date-fns';
+import { zhTW } from 'date-fns/locale';
 
 import style from './style.module.scss'
 
-type  Prop= {
-  monthDate : any
+type Prop = {
+  monthDate: Date
 }
 
-function MonthView({ monthDate } : Prop) {
-  const daysInMonth = new Date(monthDate.getFullYear(), monthDate.getMonth() + 1, 0).getDate();
-  const firstDayOfMonth = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1).getDay();
+function MonthView({ monthDate }: Prop) {
+  const daysInMonth = getDaysInMonth(monthDate);
+  const firstDayOfMonth = getDay(startOfMonth(monthDate));
   const days = Array.from({ length: daysInMonth }, (_, idx) => idx + 1);
 
   return (
-      <div key={monthDate} className={style.container}>
-          <div>{monthDate.toLocaleString('default', { month: 'long' })} {monthDate.getFullYear()}</div>
+      <div key={monthDate.toString()} className={style.container}>
+          <div>{format(monthDate, 'MMMM', { locale: zhTW })}</div>
           <table>
               <thead>
                   <tr>
-                      <th>Sun</th>
-                      <th>Mon</th>
-                      <th>Tue</th>
-                      <th>Wed</th>
-                      <th>Thu</th>
-                      <th>Fri</th>
-                      <th>Sat</th>
+                      <th>日</th>
+                      <th>一</th>
+                      <th>二</th>
+                      <th>三</th>
+                      <th>四</th>
+                      <th>五</th>
+                      <th>六</th>
                   </tr>
               </thead>
               <tbody>
