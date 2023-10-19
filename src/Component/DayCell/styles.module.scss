@@ -1,0 +1,16 @@
+.dotContainer {
+    height: 10px;
+    display: flex;
+    justify-content: center;
+
+    div {
+        margin: 0px 1px;
+    }
+}
+
+.dashContainer {
+    height: 4px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2px;
+}

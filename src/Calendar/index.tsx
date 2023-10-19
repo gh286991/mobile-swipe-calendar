@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { addMonths, subMonths } from "date-fns";
-import MonthView from "../MonthView";
+import MonthView from "../Component/MonthView";
 
 import style from "./style.module.scss";
 

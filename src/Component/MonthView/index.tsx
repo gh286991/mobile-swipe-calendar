@@ -1,7 +1,6 @@
 import { format, getDaysInMonth, startOfMonth, getDay } from "date-fns";
 import { zhTW } from "date-fns/locale";
-import Dot from "../Dot";
-import Dash from "../Dash";
+import DayCell from "../DayCell";
 
 import style from "./style.module.scss";
 
@@ -37,19 +36,7 @@ function MonthView({ monthDate }: Prop) {
                 <td key={idx}></td>
               ))}
             {days.slice(0, 7 - firstDayOfMonth).map((day) => (
-              <td key={day}>
-                {day}
-                <div className={style.dashContainer}>
-                  <Dash color="purple" />
-                  <Dash color="teal" />
-                  <Dash color="blue" />
-                </div>
-                <div className={style.dotContainer}>
-                  <Dot color="purple" />
-                  <Dot color="teal" />
-                  <Dot color="blue" />
-                </div>
-              </td>
+              <DayCell day={day} />
             ))}
           </tr>
           {Array(Math.ceil((daysInMonth - (7 - firstDayOfMonth)) / 7))
@@ -62,19 +49,7 @@ function MonthView({ monthDate }: Prop) {
                     7 - firstDayOfMonth + (weekIdx + 1) * 7,
                   )
                   .map((day) => (
-                    <td key={day}>
-                      {day}
-                      <div className={style.dashContainer}>
-                        <Dash color="purple" />
-                        <Dash color="teal" />
-                        <Dash color="blue" />
-                      </div>
-                      <div className={style.dotContainer}>
-                        <Dot color="purple" />
-                        <Dot color="teal" />
-                        <Dot color="blue" />
-                      </div>
-                    </td>
+                    <DayCell day={day} />
                   ))}
               </tr>
             ))}
