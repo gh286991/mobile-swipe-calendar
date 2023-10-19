@@ -1,0 +1,18 @@
+.dash {
+    width: 20%;
+    height: 2px;
+    display: inline-block;
+    margin: 0px 0.5px;
+
+    &.purple {
+        background-color: purple;
+    }
+
+    &.teal {
+        background-color: teal;
+    }
+
+    &.blue {
+        background-color: blue;
+    }
+}

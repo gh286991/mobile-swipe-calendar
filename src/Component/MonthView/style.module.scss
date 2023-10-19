@@ -1,6 +1,40 @@
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    width: 100%;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th,
+        td {
+            width: 14.2857%;
+            box-sizing: border-box;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 2px 4px; // 增加更多上下 padding
+            position: relative; // 為下面的小圓點做準備
+
+            // 數字樣式
+            font-size: 14px; // 根據需要調整
+            font-weight: bold;
+
+            .dotContainer {
+                height: 10px;
+                display: flex;
+                justify-content: center;
+
+                div {
+                    margin: 0px 1px;
+                }
+            }
+
+            .dashContainer {
+                height: 4px;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 2px;
+            }
+
+        }
+    }
 }

@@ -1,5 +1,7 @@
 import { format, getDaysInMonth, startOfMonth, getDay } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
+import Dot from '../Dot';
+import Dash from '../Dash';
 
 import style from './style.module.scss'
 
@@ -30,11 +32,36 @@ function MonthView({ monthDate }: Prop) {
               <tbody>
                   <tr>
                       {Array(firstDayOfMonth).fill(null).map((_, idx) => <td key={idx}></td>)}
-                      {days.slice(0, 7 - firstDayOfMonth).map(day => <td key={day}>{day}</td>)}
+                      {days.slice(0, 7 - firstDayOfMonth).map(day => <td key={day}>
+                                {day}
+                                <div className={style.dashContainer}>
+                                <Dash color="purple" />
+                                    <Dash color="teal" />
+                                    <Dash color="blue" />
+                                </div>
+                                <div className={style.dotContainer}>
+                                    <Dot color="purple" />
+                                    <Dot color="teal" />
+                                    <Dot color="blue" />
+                                </div>
+                            </td>)}
                   </tr>
                   {Array(Math.ceil((daysInMonth - (7 - firstDayOfMonth)) / 7)).fill(null).map((_, weekIdx) => (
                       <tr key={weekIdx}>
-                          {days.slice((7 - firstDayOfMonth) + (weekIdx * 7), (7 - firstDayOfMonth) + ((weekIdx + 1) * 7)).map(day => <td key={day}>{day}</td>)}
+                          {days.slice((7 - firstDayOfMonth) + (weekIdx * 7), (7 - firstDayOfMonth) + ((weekIdx + 1) * 7)).map(day =>
+                             <td key={day}>
+                                {day}
+                                <div className={style.dashContainer}>
+                                <Dash color="purple" />
+                                    <Dash color="teal" />
+                                    <Dash color="blue" />
+                                </div>
+                                <div className={style.dotContainer}>
+                                    <Dot color="purple" />
+                                    <Dot color="teal" />
+                                    <Dot color="blue" />
+                                </div>
+                            </td>)}
                       </tr>
                   ))}
               </tbody>
