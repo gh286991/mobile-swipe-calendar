@@ -5,12 +5,13 @@ import style from "./styles.module.scss";
 
 type DayCellProps = {
   day: number;
+  isToday: boolean;
 };
 
-const DayCell: React.FC<DayCellProps> = ({ day }) => {
+const DayCell: React.FC<DayCellProps> = ({ isToday, day }) => {
   return (
     <td key={day}>
-      {day}
+      <div className={isToday ? style.today : ""}>{day}</div>
       <div className={style.dashContainer}>
         <Dash color="purple" />
         <Dash color="teal" />

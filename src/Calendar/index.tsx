@@ -1,11 +1,10 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { addMonths, subMonths } from "date-fns";
 import MonthView from "../Component/MonthView";
-
-import style from "./style.module.scss";
+import { useCalendarContext } from "./CalendarContext";
 
 function Calendar() {
-  const [focusMonth, setFocusMonth] = useState(new Date());
+  const { focusMonth, setFocusMonth } = useCalendarContext();
   const [monthsToShow, setMonthsToShow] = useState([
     subMonths(new Date(), 1),
     new Date(),
@@ -13,7 +12,7 @@ function Calendar() {
   ]);
   const [touchStartY, setTouchStartY] = useState(0);
   const calendarRef = useRef(null);
-
+  const MemoizedMonthView = React.memo(MonthView);
   useEffect(() => {
     setMonthsToShow([
       subMonths(focusMonth, 1),
@@ -44,10 +43,6 @@ function Calendar() {
     [touchStartY, calendarRef],
   );
 
-  const goToToday = () => {
-    setFocusMonth(new Date());
-  };
-
   const handleWheel = useCallback(
     (event: React.WheelEvent) => {
       if (!calendarRef.current) return;
@@ -65,9 +60,6 @@ function Calendar() {
 
   return (
     <div>
-      <button className={style.test} onClick={goToToday}>
-        回到今天
-      </button>
       <div
         ref={calendarRef}
         onTouchStart={handleTouchStart}
@@ -76,7 +68,7 @@ function Calendar() {
         style={{ overflowY: "auto", height: "100%" }}
       >
         {monthsToShow.map((month) => (
-          <MonthView monthDate={new Date(month)} />
+          <MemoizedMonthView monthDate={new Date(month)} />
         ))}
       </div>
     </div>

@@ -1451,6 +1451,16 @@ minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   dependencies:
     brace-expansion "^1.1.7"
 
+mobile-swipe-calendar@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/mobile-swipe-calendar/-/mobile-swipe-calendar-0.0.6.tgz#71ea38f4b385d65959ac59b035c322fce0da767a"
+  integrity sha512-GC8NXu9h3n/4/nb07/Sqg1Om5y9Zr2AhObijriT0xlv9xFum8VtaOXVfH0WQ3OAXRzW7L2Pkgow7KGqiNPI0og==
+  dependencies:
+    date-fns "^2.30.0"
+    react "^18.2.0"
+    react-dom "^18.2.0"
+    sass "^1.69.4"
+
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"

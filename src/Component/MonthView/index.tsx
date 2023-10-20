@@ -1,5 +1,13 @@
-import { format, getDaysInMonth, startOfMonth, getDay } from "date-fns";
+import {
+  isToday,
+  format,
+  getDaysInMonth,
+  startOfMonth,
+  getDay,
+} from "date-fns";
+
 import { zhTW } from "date-fns/locale";
+
 import DayCell from "../DayCell";
 
 import style from "./style.module.scss";
@@ -12,6 +20,8 @@ function MonthView({ monthDate }: Prop) {
   const daysInMonth = getDaysInMonth(monthDate);
   const firstDayOfMonth = getDay(startOfMonth(monthDate));
   const days = Array.from({ length: daysInMonth }, (_, idx) => idx + 1);
+  const month = monthDate.getMonth();
+  const year = monthDate.getFullYear();
 
   return (
     <div key={monthDate.toString()} className={style.container}>
@@ -36,7 +46,10 @@ function MonthView({ monthDate }: Prop) {
                 <td key={idx}></td>
               ))}
             {days.slice(0, 7 - firstDayOfMonth).map((day) => (
-              <DayCell day={day} />
+              <DayCell
+                day={day}
+                isToday={isToday(new Date(year, month, day))}
+              />
             ))}
           </tr>
           {Array(Math.ceil((daysInMonth - (7 - firstDayOfMonth)) / 7))
@@ -49,7 +62,10 @@ function MonthView({ monthDate }: Prop) {
                     7 - firstDayOfMonth + (weekIdx + 1) * 7,
                   )
                   .map((day) => (
-                    <DayCell day={day} />
+                    <DayCell
+                      day={day}
+                      isToday={isToday(new Date(year, month, day))}
+                    />
                   ))}
               </tr>
             ))}
