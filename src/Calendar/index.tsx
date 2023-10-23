@@ -3,7 +3,13 @@ import { addMonths, subMonths } from "date-fns";
 import MonthView from "../Component/MonthView";
 import { useCalendarContext } from "./CalendarContext";
 
-function Calendar() {
+import { DateColorsConfig } from "../Const/colors";
+
+type Props = {
+  dateColorsConfig: DateColorsConfig;
+};
+
+function Calendar({ dateColorsConfig }: Props) {
   const { focusMonth, setFocusMonth } = useCalendarContext();
   const [monthsToShow, setMonthsToShow] = useState([
     subMonths(new Date(), 1),
@@ -68,7 +74,11 @@ function Calendar() {
         style={{ overflowY: "auto", height: "100%" }}
       >
         {monthsToShow.map((month) => (
-          <MonthView key={+month} monthDate={new Date(month)} />
+          <MonthView
+            key={+month}
+            monthDate={new Date(month)}
+            dateColorsConfig={dateColorsConfig}
+          />
         ))}
       </div>
     </div>

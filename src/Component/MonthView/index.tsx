@@ -9,19 +9,35 @@ import {
 import { zhTW } from "date-fns/locale";
 
 import DayCell from "../DayCell";
+import { eventColors, typeColors, DateColorsConfig } from "../../Const/colors";
 
 import style from "./style.module.scss";
 
 type Prop = {
   monthDate: Date;
+  dateColorsConfig: DateColorsConfig;
 };
 
-function MonthView({ monthDate }: Prop) {
+function MonthView({ monthDate, dateColorsConfig }: Prop) {
   const daysInMonth = getDaysInMonth(monthDate);
   const firstDayOfMonth = getDay(startOfMonth(monthDate));
   const days = Array.from({ length: daysInMonth }, (_, idx) => idx + 1);
   const month = monthDate.getMonth();
   const year = monthDate.getFullYear();
+
+  const getColorsForDate = (date: Date) => {
+    const key = format(date, "yyyy-MM-dd");
+    const config = dateColorsConfig[key] || { events: [], types: [] };
+
+    const dashColors = config.events
+      .map((eventCode) => eventColors[eventCode])
+      .filter(Boolean);
+    const dotColors = config.types
+      .map((typeCode) => typeColors[typeCode])
+      .filter(Boolean);
+
+    return { dashColors, dotColors };
+  };
 
   return (
     <div key={monthDate.toString()} className={style.container}>
@@ -45,15 +61,20 @@ function MonthView({ monthDate }: Prop) {
               .map((_, idx) => (
                 <td key={idx}></td>
               ))}
-            {days.slice(0, 7 - firstDayOfMonth).map((day) => (
-              <DayCell
-                key={+new Date(year, month, day)}
-                day={day}
-                isToday={isToday(new Date(year, month, day))}
-                dashColors={["purple", "teal"]}
-                dotColors={["blue"]}
-              />
-            ))}
+            {days.slice(0, 7 - firstDayOfMonth).map((day) => {
+              const date = new Date(year, month, day);
+              const { dashColors, dotColors } = getColorsForDate(date);
+
+              return (
+                <DayCell
+                  key={+date}
+                  day={day}
+                  isToday={isToday(date)}
+                  dashColors={dashColors}
+                  dotColors={dotColors}
+                />
+              );
+            })}
           </tr>
           {Array(Math.ceil((daysInMonth - (7 - firstDayOfMonth)) / 7))
             .fill(null)
@@ -64,15 +85,20 @@ function MonthView({ monthDate }: Prop) {
                     7 - firstDayOfMonth + weekIdx * 7,
                     7 - firstDayOfMonth + (weekIdx + 1) * 7,
                   )
-                  .map((day) => (
-                    <DayCell
-                      key={+new Date(year, month, day)}
-                      day={day}
-                      isToday={isToday(new Date(year, month, day))}
-                      dashColors={["purple", "teal"]}
-                      dotColors={["blue"]}
-                    />
-                  ))}
+                  .map((day) => {
+                    const date = new Date(year, month, day);
+                    const { dashColors, dotColors } = getColorsForDate(date);
+
+                    return (
+                      <DayCell
+                        key={+date}
+                        day={day}
+                        isToday={isToday(date)}
+                        dashColors={dashColors}
+                        dotColors={dotColors}
+                      />
+                    );
+                  })}
               </tr>
             ))}
         </tbody>

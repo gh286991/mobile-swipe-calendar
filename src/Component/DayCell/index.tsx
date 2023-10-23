@@ -3,11 +3,13 @@ import Dot from "../../Units/Dot";
 import Dash from "../../Units/Dash";
 import style from "./styles.module.scss";
 
+import { Colors } from "../../Const/colors";
+
 type DayCellProps = {
   day: number;
   isToday: boolean;
-  dashColors: ("purple" | "teal" | "blue")[];
-  dotColors: ("purple" | "teal" | "blue")[];
+  dashColors: Colors[];
+  dotColors: Colors[];
 };
 
 const DayCell: React.FC<DayCellProps> = ({
