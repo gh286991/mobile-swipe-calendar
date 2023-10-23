@@ -12,7 +12,7 @@ function Calendar() {
   ]);
   const [touchStartY, setTouchStartY] = useState(0);
   const calendarRef = useRef(null);
-  const MemoizedMonthView = React.memo(MonthView);
+
   useEffect(() => {
     setMonthsToShow([
       subMonths(focusMonth, 1),
@@ -68,7 +68,7 @@ function Calendar() {
         style={{ overflowY: "auto", height: "100%" }}
       >
         {monthsToShow.map((month) => (
-          <MemoizedMonthView monthDate={new Date(month)} />
+          <MonthView key={+month} monthDate={new Date(month)} />
         ))}
       </div>
     </div>

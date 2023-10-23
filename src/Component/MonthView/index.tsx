@@ -47,8 +47,11 @@ function MonthView({ monthDate }: Prop) {
               ))}
             {days.slice(0, 7 - firstDayOfMonth).map((day) => (
               <DayCell
+                key={+new Date(year, month, day)}
                 day={day}
                 isToday={isToday(new Date(year, month, day))}
+                dashColors={["purple", "teal"]}
+                dotColors={["blue"]}
               />
             ))}
           </tr>
@@ -63,8 +66,11 @@ function MonthView({ monthDate }: Prop) {
                   )
                   .map((day) => (
                     <DayCell
+                      key={+new Date(year, month, day)}
                       day={day}
                       isToday={isToday(new Date(year, month, day))}
+                      dashColors={["purple", "teal"]}
+                      dotColors={["blue"]}
                     />
                   ))}
               </tr>

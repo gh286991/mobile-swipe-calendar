@@ -6,21 +6,28 @@ import style from "./styles.module.scss";
 type DayCellProps = {
   day: number;
   isToday: boolean;
+  dashColors: ("purple" | "teal" | "blue")[];
+  dotColors: ("purple" | "teal" | "blue")[];
 };
 
-const DayCell: React.FC<DayCellProps> = ({ isToday, day }) => {
+const DayCell: React.FC<DayCellProps> = ({
+  isToday,
+  day,
+  dashColors,
+  dotColors,
+}) => {
   return (
     <td key={day}>
       <div className={isToday ? style.today : ""}>{day}</div>
       <div className={style.dashContainer}>
-        <Dash color="purple" />
-        <Dash color="teal" />
-        <Dash color="blue" />
+        {dashColors.map((color, index) => (
+          <Dash key={index} color={color} />
+        ))}
       </div>
       <div className={style.dotContainer}>
-        <Dot color="purple" />
-        <Dot color="teal" />
-        <Dot color="blue" />
+        {dotColors.map((color, index) => (
+          <Dot key={index} color={color} />
+        ))}
       </div>
     </td>
   );
