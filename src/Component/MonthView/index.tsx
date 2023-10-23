@@ -16,9 +16,10 @@ import style from "./style.module.scss";
 type Prop = {
   monthDate: Date;
   dateColorsConfig: DateColorsConfig;
+  onClick: (date: Date) => void;
 };
 
-function MonthView({ monthDate, dateColorsConfig }: Prop) {
+function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
   const daysInMonth = getDaysInMonth(monthDate);
   const firstDayOfMonth = getDay(startOfMonth(monthDate));
   const days = Array.from({ length: daysInMonth }, (_, idx) => idx + 1);
@@ -68,10 +69,11 @@ function MonthView({ monthDate, dateColorsConfig }: Prop) {
               return (
                 <DayCell
                   key={+date}
-                  day={day}
+                  date={date}
                   isToday={isToday(date)}
                   dashColors={dashColors}
                   dotColors={dotColors}
+                  onClick={onClick}
                 />
               );
             })}
@@ -92,10 +94,11 @@ function MonthView({ monthDate, dateColorsConfig }: Prop) {
                     return (
                       <DayCell
                         key={+date}
-                        day={day}
+                        date={date}
                         isToday={isToday(date)}
                         dashColors={dashColors}
                         dotColors={dotColors}
+                        onClick={onClick}
                       />
                     );
                   })}

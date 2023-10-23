@@ -7,9 +7,10 @@ import { DateColorsConfig } from "../Const/colors";
 
 type Props = {
   dateColorsConfig: DateColorsConfig;
+  onClick: (date: Date) => void;
 };
 
-function Calendar({ dateColorsConfig }: Props) {
+function Calendar({ dateColorsConfig, onClick }: Props) {
   const { focusMonth, setFocusMonth } = useCalendarContext();
   const [monthsToShow, setMonthsToShow] = useState([
     subMonths(new Date(), 1),
@@ -78,6 +79,7 @@ function Calendar({ dateColorsConfig }: Props) {
             key={+month}
             monthDate={new Date(month)}
             dateColorsConfig={dateColorsConfig}
+            onClick={onClick}
           />
         ))}
       </div>

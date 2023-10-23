@@ -24,12 +24,13 @@ const dateColorsConfig: DateColorsConfig = {
 function App() {
   const [focusMonth, setFocusMonth] = useState(new Date());
   return (
-    <>
-      <CalendarProvider focusMonth={focusMonth} setFocusMonth={setFocusMonth}>
-        <Calendar dateColorsConfig={dateColorsConfig}></Calendar>
-        <GoToTodayButton />
-      </CalendarProvider>
-    </>
+    <CalendarProvider focusMonth={focusMonth} setFocusMonth={setFocusMonth}>
+      <Calendar
+        onClick={() => {}}
+        dateColorsConfig={dateColorsConfig}
+      ></Calendar>
+      <GoToTodayButton />
+    </CalendarProvider>
   );
 }
 
