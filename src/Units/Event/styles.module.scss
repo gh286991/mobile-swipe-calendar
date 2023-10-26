@@ -1,0 +1,17 @@
+.event {
+    height: 16px;
+    width: 4px;
+
+
+    &.purple {
+        background-color: purple;
+    }
+
+    &.teal {
+        background-color: teal;
+    }
+
+    &.blue {
+        background-color: blue;
+    }
+}

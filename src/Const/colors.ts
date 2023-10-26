@@ -1,5 +1,5 @@
-type EventCode = 1 | 2 | 3;
-type TypeCode = 1 | 2 | 3;
+export type EventCode = 1 | 2 | 3;
+export type TypeCode = 1 | 2 | 3;
 export type Colors = "purple" | "teal" | "blue";
 
 export const eventColors: Record<EventCode, Colors> = {
@@ -14,7 +14,7 @@ export const typeColors: Record<TypeCode, Colors> = {
   3: "blue", // 個人行事曆
 };
 
-export type DateColorsConfig = {
+export declare type DateColorsConfig = {
   [key: string]: {
     events: EventCode[];
     types: TypeCode[];

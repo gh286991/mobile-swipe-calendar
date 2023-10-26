@@ -1,0 +1,46 @@
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 16px;
+
+    p {
+        margin: 4px;
+    }
+
+    span {
+        display: inline-block;
+        width: 1.2em;
+        text-align: center;
+        font-size: 15px;
+    }
+}
+
+.dash {
+    border: 1px rgb(184, 183, 183) solid;
+    width: 100%;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.contentName {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-weight: bold;
+    width: 100%;
+}
