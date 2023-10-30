@@ -15,6 +15,7 @@ import Event from "../Units/Event";
 import style from "./style.module.scss";
 
 export interface DateItem {
+  id: string;
   date: string;
   type: TypeCode | null;
   event: EventCode | null;
@@ -26,11 +27,13 @@ export interface DateItem {
 interface DateInfoProps {
   dateInfo: DateItem[];
   clickDate?: Date;
+  onClick?: (date: DateItem) => void;
 }
 
 const DateInfoComponent: React.FC<DateInfoProps> = ({
   dateInfo,
   clickDate,
+  onClick,
 }) => {
   const refs: Record<string, RefObject<HTMLDivElement>> = dateInfo.reduce<
     Record<string, RefObject<HTMLDivElement>>
@@ -114,12 +117,13 @@ const DateInfoComponent: React.FC<DateInfoProps> = ({
                 {dayFormat(item.date)}
                 <div className={style.dash} />
               </>
-            ) : (
-              ""
-            )}
+            ) : null}
           </p>
 
-          <div className={style.content}>
+          <div
+            className={style.content}
+            onClick={() => onClick && onClick(item)}
+          >
             <div className={style.contentName}>
               {item.type && <Dot color={typeColors[item.type]}></Dot>}
               {item.event && <Event color={eventColors[item.event]}></Event>}
