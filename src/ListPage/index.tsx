@@ -49,7 +49,6 @@ const DateInfoComponent: React.FC<DateInfoProps> = ({
       // 如果點擊的日期存在於列表中
       if (refs[targetDateStr]?.current) {
         refs[targetDateStr]?.current?.scrollIntoView({
-          behavior: "smooth",
           block: "start",
         });
       } else {
@@ -65,7 +64,6 @@ const DateInfoComponent: React.FC<DateInfoProps> = ({
         });
 
         refs[closestDate.date]?.current?.scrollIntoView({
-          behavior: "smooth",
           block: "start",
         });
       }
