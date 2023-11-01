@@ -40,6 +40,15 @@ function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
     return { dashColors, dotColors };
   };
 
+  const getLastRowCellsCount = () => {
+    const lastRowDayCount =
+      daysInMonth -
+      (7 -
+        firstDayOfMonth +
+        (Math.ceil((daysInMonth - (7 - firstDayOfMonth)) / 7) - 1) * 7);
+    return 7 - lastRowDayCount;
+  };
+
   return (
     <div key={monthDate.toString()} className={style.container}>
       <div>{format(monthDate, "MMMM", { locale: zhTW })}</div>
@@ -102,6 +111,12 @@ function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
                       />
                     );
                   })}
+                {/* 如果是最後一排，則補滿 <td> */}
+                {weekIdx ===
+                  Math.ceil((daysInMonth - (7 - firstDayOfMonth)) / 7) - 1 &&
+                  Array(getLastRowCellsCount())
+                    .fill(null)
+                    .map((_, idx) => <td key={idx}></td>)}
               </tr>
             ))}
         </tbody>
