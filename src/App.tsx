@@ -35,7 +35,7 @@ function App() {
             setIsShowList(!isShowList);
             setClickDate(date);
           }}
-          dateColorsConfig={calendarData as DateColorsConfig}
+          dateColorsConfig={calendarData as DateColorsConfig[]}
         />
       )}
       <GoToTodayButton />

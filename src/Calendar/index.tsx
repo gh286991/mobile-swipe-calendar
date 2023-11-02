@@ -6,7 +6,7 @@ import { useCalendarContext } from "./CalendarContext";
 import { DateColorsConfig } from "../Const/colors";
 
 type Props = {
-  dateColorsConfig: DateColorsConfig;
+  dateColorsConfig: DateColorsConfig[];
   onClick: (date: Date) => void;
 };
 

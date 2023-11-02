@@ -15,7 +15,7 @@ import style from "./style.module.scss";
 
 type Prop = {
   monthDate: Date;
-  dateColorsConfig: DateColorsConfig;
+  dateColorsConfig: DateColorsConfig[];
   onClick: (date: Date) => void;
 };
 
@@ -28,7 +28,10 @@ function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
 
   const getColorsForDate = (date: Date) => {
     const key = format(date, "yyyy-MM-dd");
-    const config = dateColorsConfig[key] || { events: [], types: [] };
+    const config = dateColorsConfig.find((item) => item.date === key) || {
+      events: [],
+      types: [],
+    };
 
     const dashColors = config.events
       .map((eventCode) => eventColors[eventCode])

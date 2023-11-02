@@ -15,8 +15,7 @@ export const typeColors: Record<TypeCode, Colors> = {
 };
 
 export declare type DateColorsConfig = {
-  [key: string]: {
-    events: EventCode[];
-    types: TypeCode[];
-  };
+  date: string;
+  events: EventCode[];
+  types: TypeCode[];
 };
