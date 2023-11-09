@@ -1,3 +1,4 @@
+import React from "react";
 // 導入組件和樣式
 import DayCell from "../../Component/DayCell";
 import { eventColors, typeColors } from "../../Const/colors";
@@ -55,7 +56,7 @@ const legendItems = [
   },
 ];
 
-const LegendPage = () => {
+const LegendPage: React.FC = () => {
   return (
     <div>
       <div className={style.itemContainer}>

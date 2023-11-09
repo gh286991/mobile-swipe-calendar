@@ -1,3 +1,13 @@
-.test {
-    color: red;
-}
+// 假设手机和平板的宽度小于 768px
+.calendarContainer {
+    overflow-y: auto;
+    height: 100%;
+  
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); // 两列，每列占用可用空间的一半
+      grid-gap: 18px; // 格子之间的间隙
+
+    }
+  }
+  

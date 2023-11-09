@@ -5,6 +5,8 @@ import MonthView from "../../Component/MonthView";
 import { useCalendarContext } from "./CalendarContext";
 import { DateColorsConfig } from "../../Const/colors";
 
+import style from "./style.module.scss";
+
 type Props = {
   dateColorsConfig: DateColorsConfig[];
   onClick: (date: Date) => void;
@@ -27,6 +29,27 @@ function Calendar({ dateColorsConfig, onClick }: Props) {
       addMonths(focusMonth, 1),
     ]);
   }, [focusMonth]);
+
+  const updateMonthsToShow = useCallback(() => {
+    const width = window.innerWidth;
+    const isDesktop = width >= 768;
+    const months = isDesktop ? 6 : 3;
+
+    setMonthsToShow(
+      Array.from({ length: months }, (_, i) =>
+        subMonths(focusMonth, Math.floor(months / 2) - i),
+      ),
+    );
+  }, [focusMonth]);
+
+  useEffect(() => {
+    updateMonthsToShow();
+    window.addEventListener("resize", updateMonthsToShow);
+
+    return () => {
+      window.removeEventListener("resize", updateMonthsToShow);
+    };
+  }, [updateMonthsToShow]);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     setTouchStartY(e.touches[0].clientY);
@@ -73,6 +96,7 @@ function Calendar({ dateColorsConfig, onClick }: Props) {
         onTouchMove={handleTouchMove}
         onWheel={handleWheel}
         style={{ overflowY: "auto", height: "100%" }}
+        className={style.calendarContainer}
       >
         {monthsToShow.map((month) => (
           <MonthView
