@@ -1,0 +1,19 @@
+.itemContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    table {
+        border-collapse: collapse;
+
+        td {
+            &:first-child {
+                width: 40px;
+            }
+
+            &:nth-child(2) {
+                width: auto;
+            }
+        }
+    }
+}

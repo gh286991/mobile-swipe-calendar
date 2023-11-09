@@ -4,6 +4,8 @@ import ListPage, { DateItem } from "./Module/ListPage";
 import { CalendarProvider } from "./Module/Calendar/CalendarContext";
 import GoToTodayButton from "./Component/GoToTodayButton";
 import GoBackButton from "./Component/GoBackButton";
+import LegendPage from "./Module/LegendPage";
+
 import { DateColorsConfig } from "./Const/colors";
 
 import calendarData from "./mockData/calendar.json";
@@ -16,30 +18,33 @@ function App() {
   const [clickDate, setClickDate] = useState<Date | undefined>(undefined);
 
   return (
-    <CalendarProvider focusMonth={focusMonth} setFocusMonth={setFocusMonth}>
-      <GoBackButton
-        isShowList={isShowList}
-        setIsShowList={setIsShowList}
-      ></GoBackButton>
-      {isShowList ? (
-        <ListPage
-          dateInfo={dateInfo as DateItem[]}
-          clickDate={clickDate}
-          onClick={(dateItem) => {
-            console.log("Clicked date:", dateItem);
-          }}
-        />
-      ) : (
-        <Calendar
-          onClick={(date) => {
-            setIsShowList(!isShowList);
-            setClickDate(date);
-          }}
-          dateColorsConfig={calendarData as DateColorsConfig[]}
-        />
-      )}
-      <GoToTodayButton />
-    </CalendarProvider>
+    <>
+      <CalendarProvider focusMonth={focusMonth} setFocusMonth={setFocusMonth}>
+        <GoBackButton
+          isShowList={isShowList}
+          setIsShowList={setIsShowList}
+        ></GoBackButton>
+        {isShowList ? (
+          <ListPage
+            dateInfo={dateInfo as DateItem[]}
+            clickDate={clickDate}
+            onClick={(dateItem) => {
+              console.log("Clicked date:", dateItem);
+            }}
+          />
+        ) : (
+          <Calendar
+            onClick={(date) => {
+              setIsShowList(!isShowList);
+              setClickDate(date);
+            }}
+            dateColorsConfig={calendarData as DateColorsConfig[]}
+          />
+        )}
+        <GoToTodayButton />
+      </CalendarProvider>
+      <LegendPage></LegendPage>
+    </>
   );
 }
 

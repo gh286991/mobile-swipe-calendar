@@ -7,7 +7,12 @@ import {
   parse,
 } from "date-fns";
 import { zhTW } from "date-fns/locale";
-import { typeColors, eventColors, EventCode, TypeCode } from "../../Const/colors";
+import {
+  typeColors,
+  eventColors,
+  EventCode,
+  TypeCode,
+} from "../../Const/colors";
 
 import Dot from "../../Component/Units/Dot";
 import Event from "../../Component/Units/Event";
