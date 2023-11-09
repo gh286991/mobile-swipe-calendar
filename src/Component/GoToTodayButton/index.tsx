@@ -1,5 +1,5 @@
 import React from "react";
-import { useCalendarContext } from "../../Calendar/CalendarContext";
+import { useCalendarContext } from "../../Module/Calendar/CalendarContext";
 
 interface GoToTodayButtonProps {
   className?: string;

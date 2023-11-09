@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { addMonths, subMonths } from "date-fns";
-import MonthView from "../Component/MonthView";
+import MonthView from "../../Component/MonthView";
 
 import { useCalendarContext } from "./CalendarContext";
-import { DateColorsConfig } from "../Const/colors";
+import { DateColorsConfig } from "../../Const/colors";
 
 type Props = {
   dateColorsConfig: DateColorsConfig[];

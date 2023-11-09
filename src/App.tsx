@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Calendar from "./Calendar";
-import ListPage, { DateItem } from "./ListPage";
-import { CalendarProvider } from "./Calendar/CalendarContext";
+import Calendar from "./Module/Calendar";
+import ListPage, { DateItem } from "./Module/ListPage";
+import { CalendarProvider } from "./Module/Calendar/CalendarContext";
 import GoToTodayButton from "./Component/GoToTodayButton";
 import GoBackButton from "./Component/GoBackButton";
 import { DateColorsConfig } from "./Const/colors";
