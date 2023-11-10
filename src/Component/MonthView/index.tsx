@@ -16,10 +16,11 @@ import style from "./style.module.scss";
 type Prop = {
   monthDate: Date;
   dateColorsConfig: DateColorsConfig[];
+  isSimple?: boolean; // 是否為簡單模式(只顯示icon，不顯示文字)
   onClick: (date: Date) => void;
 };
 
-function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
+function MonthView({ monthDate, dateColorsConfig, isSimple, onClick }: Prop) {
   const daysInMonth = getDaysInMonth(monthDate);
   const firstDayOfMonth = getDay(startOfMonth(monthDate));
   const days = Array.from({ length: daysInMonth }, (_, idx) => idx + 1);
@@ -31,16 +32,18 @@ function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
     const config = dateColorsConfig.find((item) => item.date === key) || {
       events: [],
       types: [],
+      stringEvent: {},
     };
 
     const dashColors = config.events
-      .map((eventCode) => eventColors[eventCode])
+      ?.map((eventCode) => eventColors[eventCode])
       .filter(Boolean);
     const dotColors = config.types
-      .map((typeCode) => typeColors[typeCode])
+      ?.map((typeCode) => typeColors[typeCode])
       .filter(Boolean);
+    const stringEvent = config.stringEvent; // 取得該日期事件文字
 
-    return { dashColors, dotColors };
+    return { dashColors, dotColors, stringEvent };
   };
 
   const getLastRowCellsCount = () => {
@@ -53,7 +56,7 @@ function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
   };
 
   return (
-    <div key={monthDate.toString()} className={style.container}>
+    <div key={monthDate.toString()} className={`${style.container} month-view`}>
       <div>{format(monthDate, "MMMM", { locale: zhTW })}</div>
       <table>
         <thead>
@@ -76,7 +79,8 @@ function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
               ))}
             {days.slice(0, 7 - firstDayOfMonth).map((day) => {
               const date = new Date(year, month, day);
-              const { dashColors, dotColors } = getColorsForDate(date);
+              const { dashColors, dotColors, stringEvent } =
+                getColorsForDate(date);
 
               return (
                 <DayCell
@@ -85,6 +89,8 @@ function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
                   isToday={isToday(date)}
                   dashColors={dashColors}
                   dotColors={dotColors}
+                  isSimple={isSimple}
+                  stringEvent={stringEvent}
                   onClick={onClick}
                 />
               );
@@ -101,15 +107,18 @@ function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
                   )
                   .map((day) => {
                     const date = new Date(year, month, day);
-                    const { dashColors, dotColors } = getColorsForDate(date);
+                    const { dashColors, dotColors, stringEvent } =
+                      getColorsForDate(date);
 
                     return (
                       <DayCell
                         key={+date}
                         date={date}
+                        stringEvent={stringEvent}
                         isToday={isToday(date)}
                         dashColors={dashColors}
                         dotColors={dotColors}
+                        isSimple={isSimple}
                         onClick={onClick}
                       />
                     );
@@ -127,5 +136,10 @@ function MonthView({ monthDate, dateColorsConfig, onClick }: Prop) {
     </div>
   );
 }
+
+// props 預設值
+MonthView.defaultProps = {
+  isSimple: true, // 是否為簡單模式
+};
 
 export default MonthView;

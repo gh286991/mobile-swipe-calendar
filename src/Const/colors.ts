@@ -14,8 +14,14 @@ export const typeColors: Record<TypeCode, Colors> = {
   3: "blue", // 個人行事曆
 };
 
+export interface IStringEvent {
+  eventName?: string; // 事件名稱
+  eventType?: string; // 事件類型
+}
+
 export declare type DateColorsConfig = {
   date: string;
-  events: EventCode[];
-  types: TypeCode[];
+  events?: EventCode[];
+  types?: TypeCode[];
+  stringEvent?: IStringEvent; // 日期事件文字
 };

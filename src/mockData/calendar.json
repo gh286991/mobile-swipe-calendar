@@ -285,7 +285,11 @@
         "types": [
             3,
             3
-        ]
+        ],       
+         "stringEvent": {
+            "eventName": "例",
+            "eventType": 2
+        }    
     },
     {
         "date": "2023-11-05",
@@ -297,7 +301,11 @@
         "types": [
             3,
             1
-        ]
+        ],       
+        "stringEvent": {
+           "eventName": "休",
+           "eventType": 2
+       }  
     },
     {
         "date": "2023-11-06",
@@ -369,7 +377,11 @@
         "types": [
             3,
             3
-        ]
+        ],       
+        "stringEvent": {
+           "eventName": "例",
+           "eventType": 2
+       }  
     },
     {
         "date": "2023-11-12",
@@ -381,7 +393,11 @@
         "types": [
             3,
             2
-        ]
+        ],       
+        "stringEvent": {
+           "eventName": "休",
+           "eventType": 2
+       }  
     },
     {
         "date": "2023-11-13",
@@ -417,7 +433,11 @@
         "types": [
             3,
             1
-        ]
+        ],       
+        "stringEvent": {
+           "eventName": "國定假日",
+           "eventType": 2
+       }  
     },
     {
         "date": "2023-11-16",
@@ -441,7 +461,11 @@
         "types": [
             1,
             2
-        ]
+        ],
+        "stringEvent": {
+            "eventName": "公司旅遊假",
+            "eventType": 1
+        }
     },
     {
         "date": "2023-11-18",
@@ -453,7 +477,11 @@
         "types": [
             2,
             2
-        ]
+        ],       
+        "stringEvent": {
+           "eventName": "例",
+           "eventType": 2
+       }  
     },
     {
         "date": "2023-11-19",
@@ -465,7 +493,43 @@
         "types": [
             2,
             2
-        ]
+        ],       
+        "stringEvent": {
+           "eventName": "休",
+           "eventType": 2
+       }  
+    },
+    {
+        "date": "2023-11-25",
+        "events": [
+            1,
+            3,
+            1
+        ],
+        "types": [
+            2,
+            2
+        ],       
+        "stringEvent": {
+           "eventName": "例",
+           "eventType": 2
+       }  
+    },
+    {
+        "date": "2023-11-26",
+        "events": [
+            3,
+            2,
+            3
+        ],
+        "types": [
+            2,
+            2
+        ],       
+        "stringEvent": {
+           "eventName": "休",
+           "eventType": 2
+       }  
     },
     {
         "date": "2023-11-20",
