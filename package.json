@@ -1,6 +1,6 @@
 {
   "name": "mobile-swipe-calendar",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "type": "module",
   "main": "dist/mobile-swipe-calendar.js",
   "types": "dist/mobile-swipe-calendar.d.ts",

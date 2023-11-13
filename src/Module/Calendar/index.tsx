@@ -8,11 +8,12 @@ import { DateColorsConfig } from "../../Const/colors";
 import style from "./style.module.scss";
 
 type Props = {
+  isSimple?: boolean; // 是否為簡單模式
   dateColorsConfig: DateColorsConfig[];
   onClick: (date: Date) => void;
 };
 
-function Calendar({ dateColorsConfig, onClick }: Props) {
+function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
   const { focusMonth, setFocusMonth } = useCalendarContext();
   const [monthsToShow, setMonthsToShow] = useState([
     subMonths(new Date(), 1),
@@ -103,6 +104,7 @@ function Calendar({ dateColorsConfig, onClick }: Props) {
             key={+month}
             monthDate={new Date(month)}
             dateColorsConfig={dateColorsConfig}
+            isSimple={isSimple}
             onClick={onClick}
           />
         ))}
@@ -110,5 +112,10 @@ function Calendar({ dateColorsConfig, onClick }: Props) {
     </div>
   );
 }
+
+// props 預設值
+Calendar.defaultProps = {
+  isSimple: true, // 是否為簡單模式
+};
 
 export default Calendar;
