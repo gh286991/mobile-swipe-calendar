@@ -1,6 +1,6 @@
 {
   "name": "mobile-swipe-calendar",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "type": "module",
   "main": "dist/mobile-swipe-calendar.js",
   "types": "dist/mobile-swipe-calendar.d.ts",
@@ -12,12 +12,14 @@
   },
   "dependencies": {
     "date-fns": "^2.30.0",
+    "lodash": "^4.17.21",
     "mobile-swipe-calendar": "^0.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.69.4"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

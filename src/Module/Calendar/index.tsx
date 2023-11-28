@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { addMonths, subMonths } from "date-fns";
+import { throttle } from "lodash";
 import MonthView from "../../Component/MonthView";
 
 import { useCalendarContext } from "./CalendarContext";
@@ -34,7 +35,7 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
   const updateMonthsToShow = useCallback(() => {
     const width = window.innerWidth;
     const isDesktop = width >= 768;
-    const months = isDesktop ? 6 : 3;
+    const months = isDesktop ? 6 : 2;
 
     setMonthsToShow(
       Array.from({ length: months }, (_, i) =>
@@ -57,7 +58,7 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
   }, []);
 
   const handleTouchMove = useCallback(
-    (e: React.TouchEvent) => {
+    throttle((e: React.TouchEvent) => {
       if (!calendarRef.current) return;
       const touchMoveY = e.touches[0].clientY;
       const diff = touchStartY - touchMoveY;
@@ -70,7 +71,7 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
         setFocusMonth((prev) => subMonths(prev, 1));
       }
       setTouchStartY(touchMoveY);
-    },
+    }, 400), // 200 毫秒為節流時間間隔
     [touchStartY, calendarRef],
   );
 
