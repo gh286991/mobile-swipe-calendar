@@ -22,6 +22,8 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
     addMonths(new Date(), 1),
   ]);
   const [touchStartY, setTouchStartY] = useState(0);
+  const [scrollDistance, setScrollDistance] = useState(0);
+  const SCROLL_THRESHOLD = 80;
   const calendarRef = useRef(null);
 
   useEffect(() => {
@@ -35,7 +37,7 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
   const updateMonthsToShow = useCallback(() => {
     const width = window.innerWidth;
     const isDesktop = width >= 768;
-    const months = isDesktop ? 6 : 2;
+    const months = isDesktop ? 4 : 2;
 
     setMonthsToShow(
       Array.from({ length: months }, (_, i) =>
@@ -92,13 +94,21 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
       const { scrollTop, scrollHeight, clientHeight } =
         calendarRef.current as HTMLElement;
 
-      if (event.deltaY > 0 && scrollTop + clientHeight >= scrollHeight) {
+      // 累加滚动距离
+      setScrollDistance((prev) => prev + event.deltaY);
+
+      if (
+        scrollDistance > SCROLL_THRESHOLD &&
+        scrollTop + clientHeight >= scrollHeight
+      ) {
         setFocusMonth((prev) => addMonths(prev, addMonth));
-      } else if (event.deltaY < 0 && scrollTop === 0) {
+        setScrollDistance(0); // 重置滚动距离
+      } else if (scrollDistance < -SCROLL_THRESHOLD && scrollTop === 0) {
         setFocusMonth((prev) => subMonths(prev, addMonth));
+        setScrollDistance(0); // 重置滚动距离
       }
     },
-    [calendarRef],
+    [calendarRef, scrollDistance],
   );
 
   return (

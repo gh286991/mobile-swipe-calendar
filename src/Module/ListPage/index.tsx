@@ -48,7 +48,7 @@ const DateInfoComponent: React.FC<DateInfoProps> = ({
   }, {});
 
   useEffect(() => {
-    if (clickDate) {
+    if (clickDate && dateInfo.length !== 0) {
       const targetDateStr = format(clickDate, "yyyy-MM-dd");
 
       // 如果點擊的日期存在於列表中
