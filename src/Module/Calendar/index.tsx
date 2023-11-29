@@ -60,31 +60,42 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
   const handleTouchMove = useCallback(
     throttle((e: React.TouchEvent) => {
       if (!calendarRef.current) return;
+      const width = window.innerWidth;
+      const isDesktop = width >= 768;
+      const addMonth = isDesktop ? 2 : 1;
       const touchMoveY = e.touches[0].clientY;
       const diff = touchStartY - touchMoveY;
       const { scrollTop, scrollHeight, clientHeight } =
         calendarRef.current as HTMLElement;
 
-      if (diff > 0 && scrollTop + clientHeight >= scrollHeight) {
-        setFocusMonth((prev) => addMonths(prev, 1));
-      } else if (diff < 0 && scrollTop === 0) {
-        setFocusMonth((prev) => subMonths(prev, 1));
+      const threshold = 25;
+
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0 && scrollTop + clientHeight >= scrollHeight) {
+          setFocusMonth((prev) => addMonths(prev, addMonth));
+        } else if (diff < 0 && scrollTop === 0) {
+          setFocusMonth((prev) => subMonths(prev, addMonth));
+        }
       }
+
       setTouchStartY(touchMoveY);
-    }, 400), // 200 毫秒為節流時間間隔
+    }, 700),
     [touchStartY, calendarRef],
   );
 
   const handleWheel = useCallback(
     (event: React.WheelEvent) => {
       if (!calendarRef.current) return;
+      const width = window.innerWidth;
+      const isDesktop = width >= 768;
+      const addMonth = isDesktop ? 2 : 1;
       const { scrollTop, scrollHeight, clientHeight } =
         calendarRef.current as HTMLElement;
 
       if (event.deltaY > 0 && scrollTop + clientHeight >= scrollHeight) {
-        setFocusMonth((prev) => addMonths(prev, 1));
+        setFocusMonth((prev) => addMonths(prev, addMonth));
       } else if (event.deltaY < 0 && scrollTop === 0) {
-        setFocusMonth((prev) => subMonths(prev, 1));
+        setFocusMonth((prev) => subMonths(prev, addMonth));
       }
     },
     [calendarRef],
