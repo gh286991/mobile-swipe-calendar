@@ -39,6 +39,7 @@ function App() {
               setClickDate(date);
             }}
             dateColorsConfig={calendarData as DateColorsConfig[]}
+            scrollThreshold={70}
           />
         )}
         <GoToTodayButton />

@@ -12,9 +12,19 @@ type Props = {
   isSimple?: boolean; // 是否為簡單模式
   dateColorsConfig: DateColorsConfig[];
   onClick: (date: Date) => void;
+  scrollThreshold?: number;
+  touchThreshold?: number;
+  touchDelayTime?: number;
 };
 
-function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
+function Calendar({
+  isSimple,
+  dateColorsConfig,
+  onClick,
+  scrollThreshold = 60,
+  touchThreshold = 25,
+  touchDelayTime = 700,
+}: Props) {
   const { focusMonth, setFocusMonth } = useCalendarContext();
   const [monthsToShow, setMonthsToShow] = useState([
     subMonths(new Date(), 1),
@@ -23,7 +33,6 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
   ]);
   const [touchStartY, setTouchStartY] = useState(0);
   const [scrollDistance, setScrollDistance] = useState(0);
-  const SCROLL_THRESHOLD = 80;
   const calendarRef = useRef(null);
 
   useEffect(() => {
@@ -70,9 +79,7 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
       const { scrollTop, scrollHeight, clientHeight } =
         calendarRef.current as HTMLElement;
 
-      const threshold = 25;
-
-      if (Math.abs(diff) > threshold) {
+      if (Math.abs(diff) > touchThreshold) {
         if (diff > 0 && scrollTop + clientHeight >= scrollHeight) {
           setFocusMonth((prev) => addMonths(prev, addMonth));
         } else if (diff < 0 && scrollTop === 0) {
@@ -81,7 +88,7 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
       }
 
       setTouchStartY(touchMoveY);
-    }, 700),
+    }, touchDelayTime),
     [touchStartY, calendarRef],
   );
 
@@ -94,18 +101,17 @@ function Calendar({ isSimple, dateColorsConfig, onClick }: Props) {
       const { scrollTop, scrollHeight, clientHeight } =
         calendarRef.current as HTMLElement;
 
-      // 累加滚动距离
       setScrollDistance((prev) => prev + event.deltaY);
 
       if (
-        scrollDistance > SCROLL_THRESHOLD &&
+        scrollDistance > scrollThreshold &&
         scrollTop + clientHeight >= scrollHeight
       ) {
         setFocusMonth((prev) => addMonths(prev, addMonth));
-        setScrollDistance(0); // 重置滚动距离
-      } else if (scrollDistance < -SCROLL_THRESHOLD && scrollTop === 0) {
+        setScrollDistance(0);
+      } else if (scrollDistance < -scrollThreshold && scrollTop === 0) {
         setFocusMonth((prev) => subMonths(prev, addMonth));
-        setScrollDistance(0); // 重置滚动距离
+        setScrollDistance(0);
       }
     },
     [calendarRef, scrollDistance],
