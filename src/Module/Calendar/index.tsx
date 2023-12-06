@@ -86,8 +86,6 @@ function Calendar({
           setFocusMonth((prev) => subMonths(prev, addMonth));
         }
       }
-
-      setTouchStartY(touchMoveY);
     }, touchDelayTime),
     [touchStartY, calendarRef],
   );
