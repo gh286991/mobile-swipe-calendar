@@ -1,9 +1,9 @@
 {
-  "name": "mobile-swipe-calendar",
+  "name": "@compal-swhq/compal-calendar",
   "version": "0.0.32",
   "type": "module",
-  "main": "dist/mobile-swipe-calendar.js",
-  "types": "dist/mobile-swipe-calendar.d.ts",
+  "main": "dist/compal-calendar.js",
+  "types": "dist/compal-calendar.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -33,6 +33,13 @@
     "prettier": "^3.0.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/compal-swhq/compal-calendar.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
   "author": "Tom Jhuang",
